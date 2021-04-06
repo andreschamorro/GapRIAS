@@ -1,0 +1,187 @@
+fileFormatVersion: 2
+guid: b9d0f6966659436cd8e27a310fe6047e
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: //RootNode
+    400000: //RootNode
+    2100000: 08-body
+    2100002: 08-alu
+    2100004: 08-black
+    2100006: 08-chrome
+    2100008: 08-fl_bulb
+    2100010: 08-fl_glass
+    2100012: 08-fl_lens
+    2100014: 08-fl_mirror
+    2100016: 08-fl_mirror_dark
+    2100018: 08-glass
+    2100020: 08-glass_black
+    2100022: 08-inside
+    2100024: 08-mirror
+    2100026: 08-shield
+    2100028: 08-Ford_Focus_Sedan
+    2100030: 01-tire.002
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: 08-Ford_Focus_Sedan
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 08-Ford_Focus_Sedan
+    second: {fileID: 2100000, guid: b2a01dce26a80584f8423f0a959559e8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 08-alu
+    second: {fileID: 2100000, guid: 8706bd5e2dffd9648a7cfbce419c2278, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 08-black
+    second: {fileID: 2100000, guid: ac3200585b470d147a169710f35f6198, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 08-body
+    second: {fileID: 2100000, guid: 7d590e9986bfc6c4cbc8f2c234b6c338, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 08-chrome
+    second: {fileID: 2100000, guid: 7ef233b41f7fdd842a5b9005b3fb5021, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 08-fl_bulb
+    second: {fileID: 2100000, guid: 6785d95b40d4f0e43a4d96cb8303d8b8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 08-fl_glass
+    second: {fileID: 2100000, guid: 80db6f22c79dfa64e8a82585f4dcdee6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 08-fl_lens
+    second: {fileID: 2100000, guid: 841553ad92785dd45a1f9ed18a4370b7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 08-fl_mirror
+    second: {fileID: 2100000, guid: 5923e50f40a744246a008eff6f8899cb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 08-fl_mirror_dark
+    second: {fileID: 2100000, guid: 1b10df34726a592478a7c99f33541367, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 08-glass
+    second: {fileID: 2100000, guid: 8775cc3cd0d08d44da72fda619bb5145, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 08-glass_black
+    second: {fileID: 2100000, guid: a4008f09edc1cbc40b5ddb510a2c87f0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 08-inside
+    second: {fileID: 2100000, guid: b35ec242959e075499d98ee08447f5b7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 08-mirror
+    second: {fileID: 2100000, guid: 8dbf7e7e471164040a51409547902853, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 08-shield
+    second: {fileID: 2100000, guid: 39667ffc6c5c1d74b83e64e83489af2d, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 0.001
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
