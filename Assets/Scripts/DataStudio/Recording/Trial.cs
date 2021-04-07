@@ -28,7 +28,29 @@ public class Trial
         Gaps = new List<float>();
     }
 
-    public string Header()
+    // Copy constructor.
+    public Trial(Trial trial)
+    {
+        StartTrialIndex = trial.StartTrialIndex;
+        EndTrialIndex = trial.EndTrialIndex;
+        PetEnterRoadwayTime = trial.PetEnterRoadwayTime;
+        PetXatEnterRoadway = trial.PetXatEnterRoadway;
+        PetZatEnterRoadway = trial.PetZatEnterRoadway;
+        LeadCarXatEnterRoadway = trial.LeadCarXatEnterRoadway;
+        TailCarXatEnterRoadway = trial.TailCarXatEnterRoadway;
+        LeadCarLane = trial.LeadCarLane;
+        TailCarLane = trial.TailCarLane;
+        PetClearCarTime = trial.PetClearCarTime;
+        PetXatClearCar = trial.PetXatClearCar;
+        PetZatClearCar = trial.PetZatClearCar;
+        PetAvgSpeed = trial.PetAvgSpeed;
+        LeadCarXatClear = trial.LeadCarXatClear;
+        TailCarXatClear = trial.TailCarXatClear;
+        Gaps = trial.Gaps;
+        StartNextTrial = trial.StartNextTrial;
+    }
+
+    public static string Header()
     {
         return "PetAvgSpeed,GapSeen,GapTaken,PetEnterRoadwayTime"
                 + ",PetXatEnterRoadway,PetZatEnterRoadway,LeadCarXatEnterRoadway"

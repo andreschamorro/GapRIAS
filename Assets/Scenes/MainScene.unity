@@ -2268,7 +2268,7 @@ GameObject:
   - component: {fileID: 724589044}
   - component: {fileID: 724589045}
   m_Layer: 0
-  m_Name: Rigth
+  m_Name: Start
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5231,7 +5231,7 @@ GameObject:
   - component: {fileID: 1729975545}
   - component: {fileID: 1729975546}
   m_Layer: 0
-  m_Name: Left
+  m_Name: Goal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -1,4 +1,6 @@
 using System;
+using System.IO;
+using System.Text;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -104,6 +106,12 @@ public class ExperimentManagerWindow : EditorWindow
             manager.doCancel = true;
         }
 
+        // save measurements
+        if (GUILayout.Button("Save Measurement", buttonStyle, height))
+        {
+            SaveMeasurement();
+        }
+
         GUI.enabled = true;
 
         EditorGUILayout.Space();
@@ -144,6 +152,36 @@ public class ExperimentManagerWindow : EditorWindow
         string assetPathAndName = AssetDatabase.GenerateUniqueAssetPath(String.Format("Assets/{0}/{1}.asset", ParentFolder, AssetName));
         TextAsset asset = new TextAsset(text);
         AssetDatabase.CreateAsset(asset, assetPathAndName);
+
+        return assetPathAndName;
+    }
+
+    private void SaveMeasurement()
+    {
+        List<Trial> trials = manager.Trials;
+        int trialExpStart = manager.trialExpStart;
+        StringBuilder textcsv = new StringBuilder();
+        textcsv.AppendLine("ID,Trial," + Trial.Header());
+        for (int i = 0; i < trials.Count; i++)
+        {
+            textcsv.AppendLine(experimentInfo.ID + "," + Convert.ToString(i - trialExpStart) + "," + trials[i].ToString());
+        }
+
+        string assetPathAndName = CreateTextInFolder(textcsv.ToString(),
+                manager.pedestrianRecorder.recorder.RecordingsPath + "/" + experimentInfo.ID, "Measurement.csv");
+        AssetDatabase.SaveAssets();
+        AssetDatabase.Refresh();
+    }
+
+    private string CreateTextInFolder(string text, string ParentFolder, string AssetName)
+    {
+        System.IO.DirectoryInfo dirInfo = new System.IO.DirectoryInfo(String.Format("{0}/{1}", Application.dataPath, ParentFolder));
+        dirInfo.Create();
+        string assetPathAndName = AssetDatabase.GenerateUniqueAssetPath(String.Format("Assets/{0}/{1}", ParentFolder, AssetName));
+        //Write some text to the test.txt file
+        StreamWriter writer = new StreamWriter(assetPathAndName, true);
+        writer.WriteLine(text);
+        writer.Close();
 
         return assetPathAndName;
     }
