@@ -117,7 +117,7 @@ public class DataStudioManager : MonoBehaviour
                                         + Math.Pow(_currentTrial.PetZatClearCar-_currentTrial.PetZatEnterRoadway,2));
                     double Pettime = _currentTrial.PetClearCarTime - _currentTrial.PetEnterRoadwayTime;
 
-                    _currentTrial.PetAvgSpeed = (float)(Petdistance/Pettime);
+                    _currentTrial.PetAvgSpeed = Petdistance/Pettime;
                     _trials.Add(new Trial(_currentTrial));
                 }
             }
@@ -139,7 +139,7 @@ public class DataStudioManager : MonoBehaviour
                                         + Math.Pow(_currentTrial.PetZatClearCar-_currentTrial.PetZatEnterRoadway,2));
                     double Pettime = _currentTrial.PetClearCarTime - _currentTrial.PetEnterRoadwayTime;
 
-                    _currentTrial.PetAvgSpeed = (float)(Petdistance/Pettime);
+                    _currentTrial.PetAvgSpeed = Petdistance/Pettime;
                     _trials.Add(new Trial(_currentTrial));
                 }
             }

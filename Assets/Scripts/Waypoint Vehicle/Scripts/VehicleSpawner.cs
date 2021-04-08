@@ -25,6 +25,17 @@ public class VehicleSpawner : SpawnerBase
 
     private float _spawnTime;
     private IEnumerator _spawnCoroutine;
+
+    public float minVelocity 
+    {
+        get { return _minVelocity; }
+        set { _minVelocity = value; }
+    }
+    public float maxVelocity 
+    {
+        get { return _maxVelocity; }
+        set { _maxVelocity = value; }
+    }
     // Start is called before the first frame update
     void Start()
     {

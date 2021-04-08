@@ -12,8 +12,6 @@ using UnityEngine.ProBuilder;
 public class ExperimentManagerWindow : EditorWindow
 {
     private DataStudioManager manager;
-    private GameObject cityBase;
-    private GameObject mainRoad;
     private Experiment experimentInfo;
     GUIStyle buttonStyle;
     GUILayoutOption height;
@@ -34,10 +32,6 @@ public class ExperimentManagerWindow : EditorWindow
                 return;
             manager = selection[0] as DataStudioManager;
         }
-
-        cityBase = GameObject.Find("CityBase");
-        mainRoad = GameObject.Find("CityBase/Roads/MainRoad");
-
     }
     private void OnSelectionChange() { Populate(); }
     private void OnEnable ()
@@ -98,6 +92,10 @@ public class ExperimentManagerWindow : EditorWindow
         if (GUILayout.Button("Save Recording", buttonStyle, height))
         {
             manager.doSave = true;
+            if (manager.doCalibration)
+            {
+                SetSignalTriggers();
+            }
             SaveMeasurement(); // save measurements
         }
 
@@ -185,9 +183,10 @@ public class ExperimentManagerWindow : EditorWindow
     private void ChangeScene()
     {
         Vector3 lanespace = experimentInfo.IsOneLane? new Vector3(0.0f, 0.0f, 1.5f) : new Vector3(0.0f, 0.0f, 3.0f);
-        cityBase.transform.Find("CityLeft").localPosition = lanespace;
-        cityBase.transform.Find("CityRight").localPosition = -lanespace;
-
+        GameObject.Find("CityBase/CityLeft").transform.localPosition = lanespace;
+        GameObject.Find("CityBase/CityRight").transform.localPosition = -lanespace;
+        
+        GameObject mainRoad = GameObject.Find("CityBase/Roads/MainRoad");
         ProBuilderMesh[] quatRoads = mainRoad.GetComponentsInChildren<ProBuilderMesh>(true);
         foreach (Transform road in mainRoad.transform)
         {
@@ -198,6 +197,10 @@ public class ExperimentManagerWindow : EditorWindow
         Vector3 vpspace = experimentInfo.IsOneLane? Vector3.zero : new Vector3(0.0f, 0.0f, 1.5f);
         GameObject.Find("VehicleDynamics/WaypointLap Left").transform.localPosition = vpspace;
         GameObject.Find("VehicleDynamics/WaypointLap Rigth").transform.localPosition = -vpspace;
+
+        GameObject.Find("DataStudio/Detectors/Start").transform.localPosition = -lanespace;
+        GameObject.Find("DataStudio/Detectors/Goal").transform.localPosition = lanespace;
+        GameObject.Find("DataStudio/Detectors/Enter").transform.localPosition = vpspace;
     }
 
     private void ScaleRoads(ProBuilderMesh quat)
@@ -214,6 +217,27 @@ public class ExperimentManagerWindow : EditorWindow
         quat.RebuildWithPositionsAndFaces(newvertex, quat.faces);
         // Recalculate UVs, Normals, Tangents, Collisions, then apply to Unity Mesh.
         quat.Refresh();
+    }
+
+    private void SetSignalTriggers()
+    {
+        List<Trial> trials = manager.Trials;
+        double petAvgSpeed = 0.0f;
+        foreach (var trial in trials)
+        {
+            petAvgSpeed += trial.PetAvgSpeed;
+        }
+        petAvgSpeed /= trials.Count; // m/s
+
+        petAvgSpeed = 1.238;
+
+        if (petAvgSpeed < 1.0e-15f) return;
+
+        float laneLength = experimentInfo.IsOneLane? 3.0f : 6.0f; // meters
+        float trDistance = (manager.vehicleSpawner.maxVelocity*0.44704f)*(laneLength/(float)petAvgSpeed);
+
+        GameObject.Find("DataStudio/SignalTriggers/Trigger In").transform.localPosition = new Vector3(-trDistance, 0.0f, 0.0f);
+        GameObject.Find("DataStudio/SignalTriggers/Trigger Out").transform.localPosition = new Vector3(trDistance, 0.0f, 0.0f);;
     }
 
     private void FindLeaves(Transform parent, List<Transform> leafArray)
