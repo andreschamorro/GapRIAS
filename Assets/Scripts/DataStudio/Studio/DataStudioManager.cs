@@ -29,6 +29,8 @@ public class DataStudioManager : MonoBehaviour
     public bool doSave = false;
     [HideInInspector]
     public bool doCancel = false;
+    [HideInInspector]
+    public bool doHit = false;
 
     //private members
     private bool isCalibrationStarted = false;
@@ -43,6 +45,8 @@ public class DataStudioManager : MonoBehaviour
     private bool _passStart = false;
     private bool _passEnter = false;
     private bool _passGoal = false;
+
+    private DisplayController _displayController;
     #endregion
     
     #region PROPERTIES
@@ -60,6 +64,7 @@ public class DataStudioManager : MonoBehaviour
     {
         _trials = new List<Trial>();
         _currentTrial = new Trial();
+        _displayController = this.transform.Find("WorldDisplay").gameObject.GetComponent<DisplayController>();
     }
 
     // Update is called once per frame
@@ -74,6 +79,11 @@ public class DataStudioManager : MonoBehaviour
         {
             StartExperiment();
         }
+        if (doHit)
+        {
+            _displayController.Hit();
+            doHit = false;
+        }
 
         if (doSave)
         {
@@ -85,6 +95,7 @@ public class DataStudioManager : MonoBehaviour
             {
                 SaveExperiment();
             }
+            _displayController.Trial(0);
             isPaused = doCancel = doSave = false;
         }
         else if (doCancel)
@@ -97,6 +108,7 @@ public class DataStudioManager : MonoBehaviour
             {
                 CancelExperiment();
             }
+            _displayController.Trial(0);
             isPaused = doCancel = doSave = false;
         }
     }
@@ -119,6 +131,8 @@ public class DataStudioManager : MonoBehaviour
 
                     _currentTrial.PetAvgSpeed = Petdistance/Pettime;
                     _trials.Add(new Trial(_currentTrial));
+
+                    _displayController.Trial(_trials.Count);
                 }
             }
 
@@ -141,6 +155,8 @@ public class DataStudioManager : MonoBehaviour
 
                     _currentTrial.PetAvgSpeed = Petdistance/Pettime;
                     _trials.Add(new Trial(_currentTrial));
+
+                    _displayController.Trial(_trials.Count);
                 }
             }
 

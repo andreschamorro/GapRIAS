@@ -136,6 +136,10 @@ public class ExperimentManagerWindow : EditorWindow
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
         }
+        if (GUILayout.Button("Hit"))
+        {
+            manager.doHit = true;
+        }
     }
 
     private string CreateTextAssetInFolder(string text, string ParentFolder, string AssetName)
