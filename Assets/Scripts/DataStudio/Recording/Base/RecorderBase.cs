@@ -73,7 +73,7 @@ namespace RecordAndRepeat
         }
         public string DestinationFolder
         {
-            get { return String.Format("Assets/{0}", recordingsPath + recordingDirectory); }
+            get { return recordingsPath + recordingDirectory; }
         }
         public RecordingBase Recording
         {

@@ -50,6 +50,7 @@ public class DataStudioManager : MonoBehaviour
     public bool IsPaused { get { return isPaused; } }
     public bool IsRecordingStarted { get { return (isCalibrationStarted || isExperimentStarted); } }
     public List<Trial> Trials { get { return _trials; }}
+    public void ClearTrials() { _trials.Clear(); }
     public int trialExpStart { get { return _trialExpStart; }}
     #endregion
 

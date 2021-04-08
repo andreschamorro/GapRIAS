@@ -98,18 +98,13 @@ public class ExperimentManagerWindow : EditorWindow
         if (GUILayout.Button("Save Recording", buttonStyle, height))
         {
             manager.doSave = true;
+            SaveMeasurement(); // save measurements
         }
 
         // cancel button
         if (GUILayout.Button("Cancel Recording", buttonStyle, height))
         {
             manager.doCancel = true;
-        }
-
-        // save measurements
-        if (GUILayout.Button("Save Measurement", buttonStyle, height))
-        {
-            SaveMeasurement();
         }
 
         GUI.enabled = true;
@@ -164,13 +159,14 @@ public class ExperimentManagerWindow : EditorWindow
         textcsv.AppendLine("ID,Trial," + Trial.Header());
         for (int i = 0; i < trials.Count; i++)
         {
-            textcsv.AppendLine(experimentInfo.ID + "," + Convert.ToString(i - trialExpStart) + "," + trials[i].ToString());
+            textcsv.AppendLine(experimentInfo.ID + "," + Convert.ToString(i) + "," + trials[i].ToString());
         }
 
         string assetPathAndName = CreateTextInFolder(textcsv.ToString(),
-                manager.pedestrianRecorder.recorder.RecordingsPath + "/" + experimentInfo.ID, "Measurement.csv");
+                manager.pedestrianRecorder.recorder.DestinationFolder, "Measurement.csv");
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
+        manager.ClearTrials();
     }
 
     private string CreateTextInFolder(string text, string ParentFolder, string AssetName)
@@ -296,7 +292,8 @@ public class ExperimentManagerWindow : EditorWindow
         EditorGUILayout.LabelField("Duration", duration);
         EditorGUILayout.LabelField("Count", recordCount);
 
-        EditorGUILayout.LabelField("Destination Folder", manager.pedestrianRecorder.recorder.DestinationFolder);
+        EditorGUILayout.LabelField("Destination Folder", 
+                String.Format("Assets/{0}", manager.pedestrianRecorder.recorder.DestinationFolder));
 
         EditorGUILayout.EndVertical();
     }

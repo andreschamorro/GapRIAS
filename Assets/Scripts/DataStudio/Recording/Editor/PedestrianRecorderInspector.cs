@@ -161,7 +161,7 @@ public class PedestrianRecorderInspector : Editor
         EditorGUILayout.LabelField("Duration", duration);
         EditorGUILayout.LabelField("Count", recordCount);
 
-        EditorGUILayout.LabelField("Destination Folder", recorder.DestinationFolder);
+        EditorGUILayout.LabelField("Destination Folder", String.Format("Assets/{0}", recorder.DestinationFolder));
 
         EditorGUILayout.EndVertical();
     }
