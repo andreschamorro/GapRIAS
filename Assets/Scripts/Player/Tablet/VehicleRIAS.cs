@@ -21,6 +21,7 @@ public class VehicleRIAS : MonoBehaviour
     #region PROPERTIES
     public bool CanWalk { get { return canWalk; } }
     public float GapSee { get { return _nextVehicleDistance/transform.GetComponent<VehicleMove>().Speed; } }
+    public float Speed { get { return transform.GetComponent<VehicleMove>().Speed; } }
     public float SpeedMPH { get { return transform.GetComponent<VehicleMove>().SpeedMPH; } }
     #endregion
 
@@ -93,6 +94,10 @@ public class VehicleRIAS : MonoBehaviour
     #endregion
 
     #region PUBLIC_METHODS
+    public float DistanceFrom(Transform other)
+    {
+        return Vector3.Distance(other.position, transform.position);
+    }
     public void ShowPedestrianSignal()
     {
         _pedestrianSignal.gameObject.SetActive(true);

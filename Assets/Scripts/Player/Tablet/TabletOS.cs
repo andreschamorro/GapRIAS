@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using System;
+using System.Reflection;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -24,6 +26,7 @@ public class TabletOS : MonoBehaviour
     #endregion
 
     #region PROPERTIES
+    public bool IsLandscape { get { return transform.rotation.eulerAngles.z >= 89; } }
     #endregion
     #region UNITY_METHODS
     void Awake()
@@ -72,7 +75,8 @@ public class TabletOS : MonoBehaviour
                 visibleVehicles.Add(vehicles[i].GetComponent<VehicleRIAS>());
             }
         }
-        featuresIsActive = visibleVehicles.Any();
+        featuresIsActive = true;
+        //featuresIsActive = visibleVehicles.Any();
     }
 
     private void CalculateFeatures()
@@ -91,11 +95,6 @@ public class TabletOS : MonoBehaviour
                 minDistance[lane] = dis;
             }
         }
-        /*if (minVehs[1] == null)
-        {
-            pedestrianSignal.transform.Find("Left").gameObject.SetActive(false);
-            pedestrianSignal.transform.Find("Right/Header").GetComponent<Text>().text = "Vehicle Information";
-        }*/
         
         for (int lane = 0; lane < minVehs.Length; lane++)
         {
@@ -107,13 +106,13 @@ public class TabletOS : MonoBehaviour
             imgSig.sprite = !(minVehs[lane] == null || minVehs[lane].CanWalk)? 
                 signalSprite["wait"] : signalSprite["walk"];
 
-            // Gap See
+            // Time See
             Text textVal = (lane == 0)?
-                pedestrianSignal.transform.Find("Right/Gap/See").GetComponent<Text>() : 
-                pedestrianSignal.transform.Find("Left/Gap/See").GetComponent<Text>();
+                pedestrianSignal.transform.Find("Right/Time/See").GetComponent<Text>() : 
+                pedestrianSignal.transform.Find("Left/Time/See").GetComponent<Text>();
 
-            textVal.text = (minVehs[lane] == null || minVehs[lane].GapSee == Mathf.Infinity)? 
-                "--" : minVehs[lane].GapSee.ToString("F0")+" s";
+            textVal.text = (minVehs[lane] == null)? 
+                "--" : (minVehs[lane].DistanceFrom(transform)/minVehs[lane].Speed).ToString("F0")+" s";
 
             // Speed
             textVal = (lane == 0)?
@@ -130,35 +129,70 @@ public class TabletOS : MonoBehaviour
                 pedestrianSignal.transform.Find("Left/Distance/See").GetComponent<Text>();
 
             textVal.text = minVehs[lane] == null? 
-                "--" : (minVehs[lane].gameObject.transform.position.magnitude*3.28084).ToString("F0")+" ft";
+                "--" : (minVehs[lane].DistanceFrom(transform)*3.28084).ToString("F0")+" ft";
         }
     }
 
     private void SimpleFeatures()
     {
-        pedestrianSignal.transform.Find("Left/Gap").gameObject.SetActive(false);
+        pedestrianSignal.transform.Find("Left/Time").gameObject.SetActive(false);
         pedestrianSignal.transform.Find("Left/Speed").gameObject.SetActive(false);
         pedestrianSignal.transform.Find("Left/Distance").gameObject.SetActive(false);
 
-        pedestrianSignal.transform.Find("Right/Gap").gameObject.SetActive(false);
+        pedestrianSignal.transform.Find("Right/Time").gameObject.SetActive(false);
         pedestrianSignal.transform.Find("Right/Speed").gameObject.SetActive(false);
         pedestrianSignal.transform.Find("Right/Distance").gameObject.SetActive(false);
+
+        // Center
+        if (IsLandscape)
+        {
+            pedestrianSignal.transform.Find("Left/SignalImage").localPosition = new Vector3 (0.0f, -0.0025f, 0.0f);
+            pedestrianSignal.transform.Find("Right/SignalImage").localPosition = new Vector3 (0.0f, -0.0025f, 0.0f);
+            pedestrianSignal.transform.Find("Left/SignalImage").localScale = 1.05f*Vector3.one;
+            pedestrianSignal.transform.Find("Right/SignalImage").localScale = 1.05f*Vector3.one;
+        }
+        else
+        {
+            pedestrianSignal.transform.Find("Left/SignalImage").localPosition = Vector3.zero;
+            pedestrianSignal.transform.Find("Left/SignalImage").localScale = 1.5f*Vector3.one;
+            pedestrianSignal.transform.Find("Right/SignalImage").localPosition = Vector3.zero;
+            pedestrianSignal.transform.Find("Right/SignalImage").localScale = 1.5f*Vector3.one;
+
+            pedestrianSignal.transform.localPosition = new Vector3 (0.0f, -0.0365f, 0.0f);
+        }
     }
 
     private void ComplexFeatures()
     {
-        pedestrianSignal.transform.Find("Left/Gap").gameObject.SetActive(true);
+        pedestrianSignal.transform.Find("Left/Time").gameObject.SetActive(true);
         pedestrianSignal.transform.Find("Left/Speed").gameObject.SetActive(true);
         pedestrianSignal.transform.Find("Left/Distance").gameObject.SetActive(true);
 
-        pedestrianSignal.transform.Find("Right/Gap").gameObject.SetActive(true);
+        pedestrianSignal.transform.Find("Right/Time").gameObject.SetActive(true);
         pedestrianSignal.transform.Find("Right/Speed").gameObject.SetActive(true);
         pedestrianSignal.transform.Find("Right/Distance").gameObject.SetActive(true);
+
+        pedestrianSignal.transform.Find("Left/SignalImage").localScale = Vector3.one;
+        pedestrianSignal.transform.Find("Right/SignalImage").localScale = Vector3.one;
+
+        // Best Position
+        if (IsLandscape)
+        {
+            pedestrianSignal.transform.Find("Left/SignalImage").localPosition = new Vector3 (0.016f, -0.0025f, 0.0f);
+            pedestrianSignal.transform.Find("Right/SignalImage").localPosition = new Vector3 (-0.016f, -0.0025f, 0.0f);
+        }
+        else
+        {
+            pedestrianSignal.transform.Find("Left/SignalImage").localPosition = new Vector3 (0.005f, -0.0095f, 0.0f);
+            pedestrianSignal.transform.Find("Right/SignalImage").localPosition = new Vector3 (-0.005f, -0.0095f, 0.0f);
+
+            pedestrianSignal.transform.localPosition = new Vector3 (0.0f, -0.031324f, 0.0f);
+        }
     }
     private void Orientation()
     {
         // Tablet rotations
-        if (transform.rotation.eulerAngles.z >= 89)
+        if (IsLandscape)
         {
             this.transform.Find("Display/Interface portrait").gameObject.SetActive(false);
             pedestrianSignal = this.transform.Find("Display/Interface landscape");
