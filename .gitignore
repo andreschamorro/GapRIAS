@@ -10,16 +10,17 @@
 /[Ll]ogs/
 /[Mm]emoryCaptures/
 /[Aa]ssetBundles/
-/[Aa]ssets/DataRecordings/
-/[Aa]ssets/DataRecordings.meta
-/[Aa]ssets/Screenshots/
-/[Aa]ssets/Screenshots.meta
 
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !/[Aa]ssets/**/*.meta
 
 # Uncomment this line if you wish to ignore the asset store tools plugin
 /[Aa]ssets/AssetStoreTools*
+
+/[Aa]ssets/DataRecordings/
+/[Aa]ssets/DataRecordings.meta
+/[Aa]ssets/Screenshots/
+/[Aa]ssets/Screenshots.meta
 
 # Visual Studio cache directory
 .vs/
