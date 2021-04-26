@@ -4,12 +4,14 @@
 public class PedestrianData
 {
     public Vector3 worldPos;
+    public Quaternion worldRot;
     public Vector3 forward;
 
     public PedestrianData() { }
     public PedestrianData(Transform t)
     {
         worldPos = t.position;
+        worldRot = t.rotation;
         forward = t.forward;
     }
 
