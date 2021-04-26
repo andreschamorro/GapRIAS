@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEditor;
 
@@ -134,6 +135,12 @@ public class DataStudioManager : MonoBehaviour
 
                     _displayController.Trial(_trials.Count);
                 }
+            }
+
+            if (doExperiment)
+            {
+                float tailPos = vehicleSpawner.activeObject.Where(go => (go.transform.position.x < other.transform.position.x)).Max(go => go.transform.position.x);
+                vehicleSpawner.CleanSpawners(go => go.transform.position.x < tailPos);
             }
 
             _passGoal = _passEnter = false;

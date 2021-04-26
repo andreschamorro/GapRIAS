@@ -128,21 +128,7 @@ public class VehicleWaypoint : MonoBehaviour
         }
     }
 
-    #endregion
-
-    #region PRIVATE_METHODS
-
-    private void WaitStart()
-    {
-        _wait -= Time.deltaTime;
-
-        if (_wait < 0)
-        {
-            _isWait = false;
-        }
-    }
-
-    private void EndPath()
+    public void EndPath()
     {
         if (_isRepeat)
         {
@@ -155,6 +141,20 @@ public class VehicleWaypoint : MonoBehaviour
             _isDrive = false;
 
             OnEndPath?.Invoke(this.gameObject);
+        }
+    }
+
+    #endregion
+
+    #region PRIVATE_METHODS
+
+    private void WaitStart()
+    {
+        _wait -= Time.deltaTime;
+
+        if (_wait < 0)
+        {
+            _isWait = false;
         }
     }
     

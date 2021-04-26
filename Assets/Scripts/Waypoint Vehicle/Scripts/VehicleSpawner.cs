@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class VehicleSpawner : SpawnerBase
@@ -56,6 +57,16 @@ public class VehicleSpawner : SpawnerBase
     public void StopSpawners()
     {
         StopCoroutine(_spawnCoroutine);
+    }
+
+    public void CleanSpawners(System.Func<GameObject, bool> condition)
+    {
+        var selectedObj = activeObject.Where(condition).ToList();
+        for (int i = 0; i < selectedObj.Count; i++)
+        {
+            Debug.Log(selectedObj[i].transform.position.x);
+            selectedObj[i].GetComponent<VehicleWaypoint>().EndPath();
+        }
     }
 
     // Spawn every wait seconds.
