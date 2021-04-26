@@ -26,7 +26,7 @@ public class TabletOS : MonoBehaviour
     #endregion
 
     #region PROPERTIES
-    public bool IsLandscape { get { return transform.rotation.eulerAngles.z >= 89; } }
+    public bool IsLandscape { get { return (transform.localRotation.eulerAngles.z >= 45) && (transform.localRotation.eulerAngles.z < 135); } }
     #endregion
     #region UNITY_METHODS
     void Awake()
