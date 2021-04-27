@@ -30,8 +30,6 @@ public class DataStudioManager : MonoBehaviour
     public bool doSave = false;
     [HideInInspector]
     public bool doCancel = false;
-    [HideInInspector]
-    public bool doHit = false;
 
     //private members
     private bool isCalibrationStarted = false;
@@ -79,11 +77,6 @@ public class DataStudioManager : MonoBehaviour
         if (!isExperimentStarted && doExperiment)
         {
             StartExperiment();
-        }
-        if (doHit)
-        {
-            _displayController.Hit();
-            doHit = false;
         }
 
         if (doSave)
@@ -255,6 +248,11 @@ public class DataStudioManager : MonoBehaviour
         pedestrianRecorder.recorder.doSave = true;
         vehiclesRecorder.recorder.doSave = true;
         doExperiment = isExperimentStarted = false;
+    }
+    public void Hit()
+    {
+        _displayController.Hit();
+        _currentTrial.HitNum++;
     }
     #endregion
     #region PRIVATE_METHODS

@@ -21,11 +21,13 @@ public class Trial
     public double PetAvgSpeed { get; set; }
     public float LeadCarXatClear { get; set; }
     public float TailCarXatClear { get; set; }
+    public int HitNum { get; set; }
     public List<float> Gaps { get; set; }
     public int StartNextTrial { get; set; }
     public Trial()
     {
         Gaps = new List<float>();
+        HitNum = 0;
     }
 
     // Copy constructor.
@@ -46,13 +48,14 @@ public class Trial
         PetAvgSpeed = trial.PetAvgSpeed;
         LeadCarXatClear = trial.LeadCarXatClear;
         TailCarXatClear = trial.TailCarXatClear;
+        HitNum = trial.HitNum;
         Gaps = trial.Gaps;
         StartNextTrial = trial.StartNextTrial;
     }
 
     public static string Header()
     {
-        return "PetAvgSpeed,GapSeen,GapTaken,PetEnterRoadwayTime"
+        return "PetAvgSpeed,GapSeen,GapTaken,HitNum,PetEnterRoadwayTime"
                 + ",PetXatEnterRoadway,PetZatEnterRoadway,LeadCarXatEnterRoadway"
                 + ",TailCarXatEnterRoadway,LeadCarLane,TailCarLane"
                 + ",PetClearCarTime,PetXatClearCar,PetZatClearCar"
@@ -61,7 +64,7 @@ public class Trial
 
     public override string ToString()
     {
-        return PetAvgSpeed + "," + Gaps.Count() + "," + Gaps.FirstOrDefault() + "," + PetEnterRoadwayTime 
+        return PetAvgSpeed + "," + Gaps.Count() + "," + Gaps.FirstOrDefault() + "," + HitNum + "," + PetEnterRoadwayTime 
                 + "," + PetXatEnterRoadway + "," + PetZatEnterRoadway + "," + LeadCarXatEnterRoadway
                 + "," + TailCarXatEnterRoadway + "," + LeadCarLane + "," + TailCarLane + ","
                 + PetClearCarTime + "," + PetXatClearCar + "," + PetZatClearCar + ","

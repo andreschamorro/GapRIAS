@@ -138,7 +138,7 @@ public class ExperimentManagerWindow : EditorWindow
         }
         if (GUILayout.Button("Hit"))
         {
-            manager.doHit = true;
+            manager.Hit();
         }
     }
 
