@@ -26,7 +26,7 @@ public class TabletOS : MonoBehaviour
     #endregion
 
     #region PROPERTIES
-    public bool IsLandscape { get { return (transform.localRotation.eulerAngles.z >= 45) && (transform.localRotation.eulerAngles.z < 135); } }
+    public bool IsLandscape { get { return (transform.rotation.eulerAngles.z >= 45) && (transform.rotation.eulerAngles.z < 135); } }
     #endregion
     #region UNITY_METHODS
     void Awake()
@@ -75,8 +75,7 @@ public class TabletOS : MonoBehaviour
                 visibleVehicles.Add(vehicles[i].GetComponent<VehicleRIAS>());
             }
         }
-        featuresIsActive = true;
-        //featuresIsActive = visibleVehicles.Any();
+        featuresIsActive = visibleVehicles.Any();
     }
 
     private void CalculateFeatures()
