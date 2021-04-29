@@ -122,7 +122,6 @@ public class ExperimentManagerWindow : EditorWindow
             experimentInfo.IsOneLane = !(experimentInfo.IsOneLane);
             ChangeScene();
         }
-        // experimentInfo.IsOneLane = GUILayout.Toggle(experimentInfo.IsOneLane, experimentInfo.IsOneLane? "One Lane" : "Two Lane", buttonStyle);
         GUILayout.EndHorizontal();
         experimentInfo.ID = EditorGUILayout.TextField ("ID", experimentInfo.ID);
         experimentInfo.Age = EditorGUILayout.IntField ("Age", experimentInfo.Age);
@@ -135,10 +134,6 @@ public class ExperimentManagerWindow : EditorWindow
                     manager.pedestrianRecorder.recorder.RecordingsPath + "/" + experimentInfo.ID, "ExperimentInfo");
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
-        }
-        if (GUILayout.Button("Hit"))
-        {
-            manager.Hit();
         }
     }
 
@@ -226,19 +221,17 @@ public class ExperimentManagerWindow : EditorWindow
     private void SetSignalTriggers()
     {
         List<Trial> trials = manager.Trials;
-        double petAvgSpeed = 0.0f;
+        double pedAvgSpeed = 0.0f;
         foreach (var trial in trials)
         {
-            petAvgSpeed += trial.PetAvgSpeed;
+            pedAvgSpeed += trial.PedAvgSpeed;
         }
-        petAvgSpeed /= trials.Count; // m/s
+        pedAvgSpeed /= trials.Count; // m/s
 
-        petAvgSpeed = 1.238;
-
-        if (petAvgSpeed < 1.0e-15f) return;
+        if (pedAvgSpeed < 1.0e-10f) pedAvgSpeed = 0.25;
 
         float laneLength = experimentInfo.IsOneLane? 3.0f : 6.0f; // meters
-        float trDistance = (manager.vehicleSpawner.maxVelocity*0.44704f)*(laneLength/(float)petAvgSpeed);
+        float trDistance = (manager.vehicleSpawner.maxVelocity*0.44704f)*(laneLength/(float)pedAvgSpeed);
 
         GameObject.Find("DataStudio/SignalTriggers/Trigger In").transform.localPosition = new Vector3(-trDistance, 0.0f, 0.0f);
         GameObject.Find("DataStudio/SignalTriggers/Trigger Out").transform.localPosition = new Vector3(trDistance, 0.0f, 0.0f);;

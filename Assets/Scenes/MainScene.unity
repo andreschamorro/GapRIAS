@@ -662,7 +662,6 @@ MonoBehaviour:
   doExperiment: 0
   doSave: 0
   doCancel: 0
-  doHit: 0
 --- !u!54 &59370226
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -9234,6 +9233,7 @@ GameObject:
   - component: {fileID: 362539627169651746}
   - component: {fileID: 362539627169651757}
   - component: {fileID: 362539627169651747}
+  - component: {fileID: 362539627169651749}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -9241,6 +9241,32 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &362539627169651749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 362539627169651748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5d314522f274be67a260144219ae744, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActionOnTriggerCollision:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 59370225}
+        m_MethodName: Hit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!23 &362539627169651750
 MeshRenderer:
   m_ObjectHideFlags: 0

@@ -113,17 +113,17 @@ public class DataStudioManager : MonoBehaviour
         {
             if (pedestrianRecorder.recorder.IsRecording)
             {
-                _currentTrial.PetClearCarTime = pedestrianRecorder.recorder.Recording.duration;
-                _currentTrial.PetXatClearCar = other.transform.position.x;
-                _currentTrial.PetZatClearCar = other.transform.position.z;
+                _currentTrial.PedClearCarTime = pedestrianRecorder.recorder.Recording.duration;
+                _currentTrial.PedXatClearCar = other.transform.position.x;
+                _currentTrial.PedZatClearCar = other.transform.position.z;
 
-                if (_currentTrial.PetClearCarTime > _currentTrial.PetEnterRoadwayTime)
+                if (_currentTrial.PedClearCarTime > _currentTrial.PedEnterRoadwayTime)
                 {
-                    double Petdistance = (Math.Pow(_currentTrial.PetXatClearCar-_currentTrial.PetXatEnterRoadway,2)
-                                        + Math.Pow(_currentTrial.PetZatClearCar-_currentTrial.PetZatEnterRoadway,2));
-                    double Pettime = _currentTrial.PetClearCarTime - _currentTrial.PetEnterRoadwayTime;
+                    double Peddistance = (Math.Pow(_currentTrial.PedXatClearCar-_currentTrial.PedXatEnterRoadway,2)
+                                        + Math.Pow(_currentTrial.PedZatClearCar-_currentTrial.PedZatEnterRoadway,2));
+                    double Pedtime = _currentTrial.PedClearCarTime - _currentTrial.PedEnterRoadwayTime;
 
-                    _currentTrial.PetAvgSpeed = Petdistance/Pettime;
+                    _currentTrial.PedAvgSpeed = Peddistance/Pedtime;
                     _trials.Add(new Trial(_currentTrial));
 
                     _displayController.Trial(_trials.Count);
@@ -143,17 +143,17 @@ public class DataStudioManager : MonoBehaviour
         {
             if (pedestrianRecorder.recorder.IsRecording)
             {
-                _currentTrial.PetClearCarTime = pedestrianRecorder.recorder.Recording.duration;
-                _currentTrial.PetXatClearCar = other.transform.position.x;
-                _currentTrial.PetZatClearCar = other.transform.position.z;
+                _currentTrial.PedClearCarTime = pedestrianRecorder.recorder.Recording.duration;
+                _currentTrial.PedXatClearCar = other.transform.position.x;
+                _currentTrial.PedZatClearCar = other.transform.position.z;
 
-                if (_currentTrial.PetClearCarTime > _currentTrial.PetEnterRoadwayTime)
+                if (_currentTrial.PedClearCarTime > _currentTrial.PedEnterRoadwayTime)
                 {
-                    double Petdistance = (Math.Pow(_currentTrial.PetXatClearCar-_currentTrial.PetXatEnterRoadway,2)
-                                        + Math.Pow(_currentTrial.PetZatClearCar-_currentTrial.PetZatEnterRoadway,2));
-                    double Pettime = _currentTrial.PetClearCarTime - _currentTrial.PetEnterRoadwayTime;
+                    double Peddistance = (Math.Pow(_currentTrial.PedXatClearCar-_currentTrial.PedXatEnterRoadway,2)
+                                        + Math.Pow(_currentTrial.PedZatClearCar-_currentTrial.PedZatEnterRoadway,2));
+                    double Pedtime = _currentTrial.PedClearCarTime - _currentTrial.PedEnterRoadwayTime;
 
-                    _currentTrial.PetAvgSpeed = Petdistance/Pettime;
+                    _currentTrial.PedAvgSpeed = Peddistance/Pedtime;
                     _trials.Add(new Trial(_currentTrial));
 
                     _displayController.Trial(_trials.Count);
@@ -171,9 +171,9 @@ public class DataStudioManager : MonoBehaviour
             _passStart = true;
             if (pedestrianRecorder.recorder.IsRecording)
             {
-                _currentTrial.PetEnterRoadwayTime = pedestrianRecorder.recorder.Recording.duration;
-                _currentTrial.PetXatEnterRoadway = other.transform.position.x;
-                _currentTrial.PetZatEnterRoadway = other.transform.position.z;
+                _currentTrial.PedEnterRoadwayTime = pedestrianRecorder.recorder.Recording.duration;
+                _currentTrial.PedXatEnterRoadway = other.transform.position.x;
+                _currentTrial.PedZatEnterRoadway = other.transform.position.z;
             }
         }
 
@@ -187,9 +187,9 @@ public class DataStudioManager : MonoBehaviour
             _passGoal = true;
             if (pedestrianRecorder.recorder.IsRecording)
             {
-                _currentTrial.PetEnterRoadwayTime = pedestrianRecorder.recorder.Recording.duration;
-                _currentTrial.PetXatEnterRoadway = other.transform.position.x;
-                _currentTrial.PetZatEnterRoadway = other.transform.position.z;
+                _currentTrial.PedEnterRoadwayTime = pedestrianRecorder.recorder.Recording.duration;
+                _currentTrial.PedXatEnterRoadway = other.transform.position.x;
+                _currentTrial.PedZatEnterRoadway = other.transform.position.z;
             }
         }
     }

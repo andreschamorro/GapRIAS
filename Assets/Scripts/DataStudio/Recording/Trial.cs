@@ -8,17 +8,17 @@ public class Trial
 {
     public int StartTrialIndex { get; set; } // Start of the maneuver
     public int EndTrialIndex { get; set; } // End of the maneuver
-    public float PetEnterRoadwayTime { get; set; }
-    public float PetXatEnterRoadway { get; set; }
-    public float PetZatEnterRoadway { get; set; }
+    public float PedEnterRoadwayTime { get; set; }
+    public float PedXatEnterRoadway { get; set; }
+    public float PedZatEnterRoadway { get; set; }
     public float LeadCarXatEnterRoadway { get; set; }
     public float TailCarXatEnterRoadway { get; set; }
     public int LeadCarLane { get; set; }
     public int TailCarLane { get; set; }
-    public float PetClearCarTime { get; set; }
-    public float PetXatClearCar { get; set; }
-    public float PetZatClearCar { get; set; }
-    public double PetAvgSpeed { get; set; }
+    public float PedClearCarTime { get; set; }
+    public float PedXatClearCar { get; set; }
+    public float PedZatClearCar { get; set; }
+    public double PedAvgSpeed { get; set; }
     public float LeadCarXatClear { get; set; }
     public float TailCarXatClear { get; set; }
     public int HitNum { get; set; }
@@ -35,17 +35,17 @@ public class Trial
     {
         StartTrialIndex = trial.StartTrialIndex;
         EndTrialIndex = trial.EndTrialIndex;
-        PetEnterRoadwayTime = trial.PetEnterRoadwayTime;
-        PetXatEnterRoadway = trial.PetXatEnterRoadway;
-        PetZatEnterRoadway = trial.PetZatEnterRoadway;
+        PedEnterRoadwayTime = trial.PedEnterRoadwayTime;
+        PedXatEnterRoadway = trial.PedXatEnterRoadway;
+        PedZatEnterRoadway = trial.PedZatEnterRoadway;
         LeadCarXatEnterRoadway = trial.LeadCarXatEnterRoadway;
         TailCarXatEnterRoadway = trial.TailCarXatEnterRoadway;
         LeadCarLane = trial.LeadCarLane;
         TailCarLane = trial.TailCarLane;
-        PetClearCarTime = trial.PetClearCarTime;
-        PetXatClearCar = trial.PetXatClearCar;
-        PetZatClearCar = trial.PetZatClearCar;
-        PetAvgSpeed = trial.PetAvgSpeed;
+        PedClearCarTime = trial.PedClearCarTime;
+        PedXatClearCar = trial.PedXatClearCar;
+        PedZatClearCar = trial.PedZatClearCar;
+        PedAvgSpeed = trial.PedAvgSpeed;
         LeadCarXatClear = trial.LeadCarXatClear;
         TailCarXatClear = trial.TailCarXatClear;
         HitNum = trial.HitNum;
@@ -55,19 +55,19 @@ public class Trial
 
     public static string Header()
     {
-        return "PetAvgSpeed,GapSeen,GapTaken,HitNum,PetEnterRoadwayTime"
-                + ",PetXatEnterRoadway,PetZatEnterRoadway,LeadCarXatEnterRoadway"
+        return "PedAvgSpeed,GapSeen,GapTaken,HitNum,PedEnterRoadwayTime"
+                + ",PedXatEnterRoadway,PedZatEnterRoadway,LeadCarXatEnterRoadway"
                 + ",TailCarXatEnterRoadway,LeadCarLane,TailCarLane"
-                + ",PetClearCarTime,PetXatClearCar,PetZatClearCar"
+                + ",PedClearCarTime,PedXatClearCar,PedZatClearCar"
                 + ",LeadCarXatClear,TailCarXatClear";
     }
 
     public override string ToString()
     {
-        return PetAvgSpeed + "," + Gaps.Count() + "," + Gaps.FirstOrDefault() + "," + HitNum + "," + PetEnterRoadwayTime 
-                + "," + PetXatEnterRoadway + "," + PetZatEnterRoadway + "," + LeadCarXatEnterRoadway
+        return PedAvgSpeed + "," + Gaps.Count() + "," + Gaps.FirstOrDefault() + "," + HitNum + "," + PedEnterRoadwayTime 
+                + "," + PedXatEnterRoadway + "," + PedZatEnterRoadway + "," + LeadCarXatEnterRoadway
                 + "," + TailCarXatEnterRoadway + "," + LeadCarLane + "," + TailCarLane + ","
-                + PetClearCarTime + "," + PetXatClearCar + "," + PetZatClearCar + ","
+                + PedClearCarTime + "," + PedXatClearCar + "," + PedZatClearCar + ","
                 + LeadCarXatClear + "," + TailCarXatClear;
     }
 }
