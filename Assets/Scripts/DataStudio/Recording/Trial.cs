@@ -8,6 +8,7 @@ public class Trial
 {
     public int StartTrialIndex { get; set; } // Start of the maneuver
     public int EndTrialIndex { get; set; } // End of the maneuver
+    public float VehicleSpeed { get; set; }
     public float PedEnterRoadwayTime { get; set; }
     public float PedXatEnterRoadway { get; set; }
     public float PedZatEnterRoadway { get; set; }
@@ -35,6 +36,7 @@ public class Trial
     {
         StartTrialIndex = trial.StartTrialIndex;
         EndTrialIndex = trial.EndTrialIndex;
+        VehicleSpeed = trial.VehicleSpeed;
         PedEnterRoadwayTime = trial.PedEnterRoadwayTime;
         PedXatEnterRoadway = trial.PedXatEnterRoadway;
         PedZatEnterRoadway = trial.PedZatEnterRoadway;
@@ -49,22 +51,32 @@ public class Trial
         LeadCarXatClear = trial.LeadCarXatClear;
         TailCarXatClear = trial.TailCarXatClear;
         HitNum = trial.HitNum;
-        Gaps = trial.Gaps;
+        Gaps = new List<float>();
+        foreach (float elt in trial.Gaps)
+        {
+            Gaps.Add(elt);
+        }
         StartNextTrial = trial.StartNextTrial;
     }
 
     public static string Header()
     {
-        return "PedAvgSpeed,GapSeen,GapTaken,HitNum,PedEnterRoadwayTime"
+        return "PedAvgSpeed,VehicleSpeed,GapSeen,GapTaken,HitNum,PedEnterRoadwayTime"
                 + ",PedXatEnterRoadway,PedZatEnterRoadway,LeadCarXatEnterRoadway"
                 + ",TailCarXatEnterRoadway,LeadCarLane,TailCarLane"
                 + ",PedClearCarTime,PedXatClearCar,PedZatClearCar"
                 + ",LeadCarXatClear,TailCarXatClear";
     }
 
+    public void Clear()
+    {
+        Gaps.Clear();
+        HitNum = 0;
+    }
+
     public override string ToString()
     {
-        return PedAvgSpeed + "," + Gaps.Count() + "," + Gaps.FirstOrDefault() + "," + HitNum + "," + PedEnterRoadwayTime 
+        return PedAvgSpeed + "," + VehicleSpeed + "," + Gaps.Count() + "," + Gaps.LastOrDefault() + "," + HitNum + "," + PedEnterRoadwayTime 
                 + "," + PedXatEnterRoadway + "," + PedZatEnterRoadway + "," + LeadCarXatEnterRoadway
                 + "," + TailCarXatEnterRoadway + "," + LeadCarLane + "," + TailCarLane + ","
                 + PedClearCarTime + "," + PedXatClearCar + "," + PedZatClearCar + ","

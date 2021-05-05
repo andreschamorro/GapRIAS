@@ -8,6 +8,8 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEditor.UIElements;
 using UnityEngine.ProBuilder;
+using ViveSR;
+using ViveSR.anipal.Eye;
 
 public class ExperimentManagerWindow : EditorWindow
 {
@@ -15,6 +17,7 @@ public class ExperimentManagerWindow : EditorWindow
     private Experiment experimentInfo;
     GUIStyle buttonStyle;
     GUILayoutOption height;
+    Vector2 scrollPosition = Vector2.zero;
 
     [MenuItem("Window/ExperimentManager")]
     public static void Init()
@@ -57,6 +60,7 @@ public class ExperimentManagerWindow : EditorWindow
 
         buttonStyle = EditorStyles.miniButtonMid;
         height = GUILayout.Height(20);
+        scrollPosition = GUILayout.BeginScrollView(scrollPosition, true, true, GUILayout.Width(this.position.width), GUILayout.Height(this.position.height));
 
         EditorGUILayout.Space();
         // Experiment information
@@ -108,6 +112,10 @@ public class ExperimentManagerWindow : EditorWindow
         GUI.enabled = true;
 
         EditorGUILayout.Space();
+
+        SRanipalSetting();
+
+        GUILayout.EndScrollView();
 
     }
 
@@ -164,6 +172,34 @@ public class ExperimentManagerWindow : EditorWindow
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
         manager.ClearTrials();
+    }
+
+    private void SRanipalSetting()
+    {
+        if (SRanipal_Eye_Framework.Status == SRanipal_Eye_Framework.FrameworkStatus.WORKING)
+        {
+            GUILayout.Label("SRanipal Eye", EditorStyles.boldLabel);
+            if (GUILayout.Button("Set Parameter"))
+            {
+                EyeParameter parameter = new EyeParameter
+                {
+                    gaze_ray_parameter = new GazeRayParameter(),
+                };
+                Error error = SRanipal_Eye_API.GetEyeParameter(ref parameter);
+                Debug.Log("GetEyeParameter: " + error + "\n" +
+                          "sensitive_factor: " + parameter.gaze_ray_parameter.sensitive_factor);
+
+                parameter.gaze_ray_parameter.sensitive_factor = parameter.gaze_ray_parameter.sensitive_factor == 1 ? 0.015f : 1;
+                error = SRanipal_Eye_API.SetEyeParameter(parameter);
+                Debug.Log("SetEyeParameter: " + error + "\n" +
+                          "sensitive_factor: " + parameter.gaze_ray_parameter.sensitive_factor);
+            }
+
+            if (GUILayout.Button("Launch Calibration"))
+            {
+                SRanipal_Eye_API.LaunchEyeCalibration(IntPtr.Zero);
+            }
+        }
     }
 
     private string CreateTextInFolder(string text, string ParentFolder, string AssetName)
